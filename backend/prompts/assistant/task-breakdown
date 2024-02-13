@@ -1,0 +1,15 @@
+We need to break down a user message into a list so each item only includes one task.
+
+Assistants:
+{assistants}
+
+Here is a sample list we'll make:
+{examples}
+
+Those were examples. Here is the user message:
+User Message:
+```
+- {{task_overview_entry}}
+```
+
+Make a bullet list of each exact individual task specified in the User Message and which assistant handles it.

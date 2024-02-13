@@ -1,0 +1,15 @@
+You have performed a list of tasks for the user.
+
+Here is some context:
+```
+{{request_ctx}}
+```
+Here is the original request:
+```
+{{message}}
+```
+
+Here's the list of tasks completed:
+{{run_results}}
+
+Respond with a casual tone with a brief overview of tasks completed.

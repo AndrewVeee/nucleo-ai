@@ -1,0 +1,16 @@
+We need to fill in the following values for the task below.
+
+Here is some context to help fill it in:
+```
+{{request_ctx}}
+```
+Here is the original message for additional context:
+```
+{{message}}
+```
+
+We need to fill in the values for this task: {{task}}
+We need to fill in these values:
+{{simple_args}}
+
+Write each of the values listed above on their own line.

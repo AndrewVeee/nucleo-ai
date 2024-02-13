@@ -1,0 +1,17 @@
+We are handling one task from a user message.
+
+The original message was:
+```
+{{message}}
+```
+
+We are handling this task:
+```
+{{task_steps_entry}}
+```
+
+We need to fill in this field: {{arg_name}}
+{{arg_info}}
+
+Reply with one line:
+Fill: <value>

@@ -1,0 +1,12 @@
+We need to create a task list so we can assign simple tasks to assistants.
+
+They can only perform one small, simple task at a time. We will try to create a list with each task.
+
+Example List:
+1. Add <topic> to to do list
+2. Look up <topic>
+3. Make a document about <topic>
+
+Do not duplicate tasks.
+
+Make a list with the original wording listing tasks in the user message.

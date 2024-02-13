@@ -1,0 +1,17 @@
+We need to write a sequence of events for the user request below so we can hand off each task to different virtual assistants.
+
+Example Request: Who invented the rotary telephone? Add a to do list item to learn more about them and fix the desk.
+Example Response:
+1. Task: Look up who invented the rotary telephone.
+2. Task: Respond to user with who invented the rotary telephone.
+3. Task: Add to do list to learn more about them.
+4. Task: Add to do list to fix the desk.
+
+Example Request: Look up bird watching and write a short doc. Look up the last Acrobats game.
+Example Response:
+1. Task: Look up bird watching.
+2. Task: Write a short doc.
+3. Task: Look up the last Acrobats game.
+-- End Of Examples
+
+We need to think about each task in the user message below, then follow the example responses to break down and create single tasks using the original wording with single tasks.

@@ -1,0 +1,27 @@
+# If you make the app externally accessible, you should set a good
+# secret key.
+#auth_key = 'my s3cret k33y'
+server_port = 4742
+log_level = 3
+
+[llm]
+name = 'local-model'
+default = true
+type = 'openai'
+
+# Set this to the port of your local instance or update to your API service and key.
+openai_base_url = 'http://localhost:5000/v1'
+openai_api_key = 'none'
+openai_model = 'gpt-3.5-turbo'
+context_size = 3072
+
+# Maximum number of completions at a time.
+# For local servers (llama.cpp, oobabooga, etc), this should be set to 1 (otherwise it might cut off a response to start a new one)
+# If you're using a serving infrastructure, you can set this higher.
+max_concurrent = 1
+
+[embed]
+# If you change the embedding model, change this name so Chroma will keep working.
+db_name = "bge-small-en-v1.5"
+#embed_model = "BAAI/bge-small-en-v1.5"
+#rank_model = "cross-encoder/ms-marco-MiniLM-L-6-v2"

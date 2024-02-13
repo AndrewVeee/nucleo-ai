@@ -1,0 +1,16 @@
+We're performing the following task:
+
+```
+{{task_steps_entry}}
+```
+
+Here's our assistant list:
+Alex: Looks up information (local or global), handles web and document searches.
+Jamie: Manages to do lists and calendars.
+Jackson: Creates and edits media.
+Jordan: Drafts responses, emails, and documents.
+Blythe: Other tasks not listed above
+
+Which assistant does the task specify?
+Reply with one line:
+Assistant: <name>

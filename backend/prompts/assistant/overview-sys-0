@@ -1,0 +1,5 @@
+We need to create a task list so we can assign simple tasks to assistants.
+
+They can only perform one small, simple task at a time. We will try to create a list with each task.
+
+Our first step in the process is to make a bullet list the exact requests in the user message.

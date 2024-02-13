@@ -1,0 +1,21 @@
+We need to decide which action to use to handle a task.
+
+Here's a list of actions and their descriptions:
+{{tool_list}}
+not_listed: Action that isn't listed above.
+
+Examples:
+Task: Lookup <topic>.
+Action: web_search
+Task: Add to do for <topic>.
+Action: add_todo
+Task: Respond with <topic>.
+Action: respond_user
+Task: Build a rocket ship.
+Action: not_listed
+
+Think about what the task is asking.
+Then reply with:
+Task: <one word from the user task matching the beginning of the task>
+Reason: <what the task specifies>
+Action: <name of the action from the list above>

@@ -1,0 +1,8 @@
+We need to decide which tool to use to handle a task.
+
+Here's a list of tool names and their description:
+{{tool_list}}
+not_listed: Tool that isn't listed above.
+
+Reply with one line:
+Tool: <name of the tool>

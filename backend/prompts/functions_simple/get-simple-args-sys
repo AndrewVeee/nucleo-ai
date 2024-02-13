@@ -1,0 +1,19 @@
+We need to fill in the following form fields for the task below.
+
+Here is some context to help fill it in:
+```
+{{request_ctx}}
+```
+Here is the original message for additional context:
+```
+{{message}}
+```
+
+The above information is for context.
+
+Here are the required form fields we need to fill in:
+{{simple_args}}
+
+We need to fill in the form fields for this user task: {{task}}
+
+Then, respond with the required form fields on a single line by addressing the user task with the context provided above.
