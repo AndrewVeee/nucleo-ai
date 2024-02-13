@@ -12,6 +12,7 @@ export default {
     onOpen: function() {
       // TODO: App needs to cache or look up the meta entry id
       console.log("Open", this.metadata);
+      this.app.open_entry_id(this.metadata.id);
     },
   },
   beforeUnmount: function() {

@@ -13,11 +13,15 @@ type = 'openai'
 openai_base_url = 'http://localhost:5000/v1'
 openai_api_key = 'none'
 openai_model = 'gpt-3.5-turbo'
-context_size = 3072
+
+# NOTE: Since a proper tokenizer isn't used, you should set this to about 2/3 of your
+# actual max context size.
+context_size = 2048
 
 # Maximum number of completions at a time.
-# For local servers (llama.cpp, oobabooga, etc), this should be set to 1 (otherwise it might cut off a response to start a new one)
-# If you're using a serving infrastructure, you can set this higher.
+# For local servers (llama.cpp, oobabooga, etc), this should be set to 1, otherwise 
+# it might cut off a response to start a new one.
+# If you're using an API/serving infrastructure, you can set this higher.
 max_concurrent = 1
 
 [embed]
