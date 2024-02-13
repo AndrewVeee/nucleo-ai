@@ -1,35 +1,43 @@
-## Nucleo AI
+## Nucleo AI Alpha
 
 An AI assistant app that mixes AI features with traditional personal productivity. The
-AI can work in the background to answer multiple chats, tasks, and stream/feed entries.
+AI can work in the background to answer multiple chats, handle tasks, and stream/feed entries.
 
-This is an early release, and there's a lot to improve.
+**Warning**: Some features (esp the assistant mode) can use a lot of tokens. Be aware when you
+are trying this with paid APIs. This is an early release and there are bugs and
+improvements needed.
+
 
 ### Install and Setup
 
-You should have Python 3 installed, as well as git. I've tried to keep the app light-weight,
+You should have Python 3 and git installed. I've tried to keep the app light-weight,
 but RAG requires downloading some large files (about 850mb for the embed and cross encoder).
 
 The app does not include the LLM engine. You can connect it to any openai-compatible endpoint, like llama.cpp, oobabooga with
 the --api flag, and newer versions of ollama with the openai option. I use llama-cpp-python and
 together ai quite a bit.
 
+#### Step 1
 ```
-$ git clone <url>
-$ ./setup.sh # Create python venv, install requirements.txt, install sentencetransformers cpu)
+$ git clone git@github.com:AndrewVeee/nucleo-ai.git
+
+# Create python venv, install torch cpu-only and requirements.txt. Copy config file.
+$ ./setup.sh
 ```
 
-Edit the config file in ./data/config.toml
+#### Step 2
 
-Find the [llm] block and set your openai_base_url (something like http://localhost:5000/v1) and
-the openai_key if required. You can also set the secret_key if you want to require auth to
+Edit the config file in `./data/config.toml`
+
+Find the [llm] block and set your `openai_base_url` (something like http://localhost:5000/v1) and
+the `openai_api_key` if required. You can also set the `secret_key` if you want to require auth to
 connect to Nucleo.
 
-**Warning**: Some features (esp the assistant mode) can use a lot of tokens. Be aware when you
-are trying this with paid APIs.
+#### Step 3
 
-Now, run `./start.sh` to start the app. The first run will take a bit to download the
+Run `./start.sh` to start the app. The first run will take a bit to download the
 SentenceTransformers models for RAG support.
+
 
 ### Features
 
@@ -73,7 +81,7 @@ for others.
 
 I have some ideas I really want to try:
 
-- Researcher: In the stream, you can enter a topic and let the AI run for a few minutes, choosing
+- Researcher: In the stream, enter a topic and let the AI run for a few minutes, choosing
   subtopics, running web searches, and writing its findings in a "live document".
 - Assistant Modes: There are many ways to implement the assistant mode, from quick 1- or 2-shot
   requests, to complex ReAct LLM loops. I want to experiment with multiple options, some for
@@ -87,8 +95,8 @@ I have some ideas I really want to try:
 
 ### Developers
 
-My long term goal for Nucleo is a platform that helps developers test ideas. I'm not a fan of
-most LLM frameworks, so I'd prefer Nucleo as a collection of tools that you can pick
+My long term goal for Nucleo is a platform that helps developers test ideas and make them available to others to try easily.
+I'm not a fan of most LLM frameworks, so I'd prefer Nucleo as a collection of tools that you can pick
 and choose as you need.
 
 The code is pretty messy, but here are some key points to play around:
@@ -100,8 +108,8 @@ The code is pretty messy, but here are some key points to play around:
   'chat' to chat in basic mode, or 'message' to summarize messages.
 - With chat mode, you can also append a message with {'role': 'config', 'content': '{"rag": true}'}
   to enable RAG in the chat.
-- One of the key future features is being able to create your own virtual models easily, but
-  it's currently a pretty messy process. Take a look at `app/ai_models/default_model.py` to
+- One of the key future features is being able to create your own virtual models, but
+  it's currently a pretty messy process. Take a look at `backend/app/ai_models/default_model.py` to
   see the chat model, or assistant_model2.py for a complex example.
 
 There's so much work to do. I'm happy to help if you want to contribute.
