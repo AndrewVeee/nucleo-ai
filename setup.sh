@@ -2,6 +2,8 @@
 
 cd $(dirname $0)
 
+mkdir -p ./data/uploads
+
 if [ ! -e ./env ]; then
   echo "* Creating virtual env"
   python -m venv env

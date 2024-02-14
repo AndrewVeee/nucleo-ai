@@ -11,7 +11,7 @@ export default {
     } catch {
     }
     return {
-      name: this.chat.name,
+      name: this.chat.name || 'Assistant',
       temporary: false,
       settings: Settings.get_settings(settings),
     } 

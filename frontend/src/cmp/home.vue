@@ -85,7 +85,9 @@ export default {
     :class="dark_mode ? 'dark' : ''">
   <div class="flex-x m-1 mb-2 mx-2 xcard round-sm">
     <div class="ml-0 card flex-x flex-ctr">
-      <h4 class="my-0 mr-3">Nucleo</h4>
+      <h4 class="my-0 ml-1 mr-3">
+        Nucleo
+      </h4>
       <button @click="view = 'stream'" class="btn btn-sm btn-tab mr-2"
           :class="view == 'stream' ? 'btn-tab-sel' : ''">Stream</button>
       <button @click="view = 'todo'" class="btn btn-sm btn-tab mr-2"

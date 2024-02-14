@@ -23,8 +23,7 @@ class RAG:
     
 class Ranker:
   def __init__(self, model='cross-encoder/ms-marco-MiniLM-L-6-v2'):
-    self.cross_encoder = CrossEncoder(model,
-      automodel_args={'cache_dir': "../data/st/"})
+    self.cross_encoder = CrossEncoder(model)
 
   def rerank(self, query, data):
     comparisons = [[query, entry] for entry in data]
@@ -48,8 +47,7 @@ class EmbedFromLlama:
 class Embedding:
   #def __init__(self, model='all-MiniLM-L6-v2'):
   def __init__(self, model='BAAI/bge-small-en-v1.5'):
-    self.model = SentenceTransformer(model,
-      cache_folder="../data/st/")
+    self.model = SentenceTransformer(model)
 
   def embedding(self, text):
     return self.model.encode([text])[0]
