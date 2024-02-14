@@ -1,0 +1,10 @@
+__pycache__/
+env/
+data/
+!.keep
+
+data.bak/
+
+node_modules/
+yarn.lock
+frontend/dist/

@@ -1,11 +1,9 @@
 <script>
-import {AIChatJob, FindListItems} from '../lib/ai-job.js';
-import TodoEntry from './todo-entry.vue';
 import InlineEditor from './inline-editor.vue';
 
 export default {
   props: ['app', 'item', 'level'],
-  components: {TodoEntry,InlineEditor},
+  components: {InlineEditor},
   data() {
     return {
       todo_list: this.app.todo_list,

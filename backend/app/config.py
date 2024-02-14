@@ -3,10 +3,8 @@ import tomllib
 class Config:
   def __init__(self, app):
     self.app = app
-    self.base_conf = self.load_toml('./base-config.toml')
     self.user_conf = self.load_toml('../data/config.toml')
     self.config = {}
-    self.config.update(self.base_conf)
     self.config.update(self.user_conf)
 
   def get(self, name, default=None, path=None):

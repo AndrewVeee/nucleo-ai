@@ -4,7 +4,7 @@ import { viteSingleFile } from "vite-plugin-singlefile"
 module.exports = {
   plugins: [
     createVuePlugin(),
-    viteSingleFile(),
+    //viteSingleFile(),
   ],
   base: './',
   server: {

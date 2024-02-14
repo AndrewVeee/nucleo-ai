@@ -1,9 +1,7 @@
 <script>
 
-import {AIChatJob, FindListItems} from '../lib/ai-job.js';
 import TodoList from './todo-list.vue';
 import DocList from './doc-list.vue';
-import PromptList from './prompt-list.vue';
 import Stream from './stream.vue';
 import Modal from './modal.vue';
 import ModalTextInput from './modal-text-input.vue';
@@ -20,9 +18,7 @@ export default {
       chat_msg: '',
       chat_handler: null, //'User Request',
       logs: this.app.ai_log,
-      views: {todo: TodoList, prompts: PromptList},
       view: 'stream',
-      AIChatJob: AIChatJob,
       resize: null,
       dark_mode: this.app.load_local('dark', false) == "true",
     };

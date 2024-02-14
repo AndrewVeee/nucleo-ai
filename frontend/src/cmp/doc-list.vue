@@ -1,6 +1,4 @@
 <script>
-import {AIChatJob, FindListItems} from '../lib/ai-job.js';
-import TodoEntry from './todo-entry.vue';
 import ModalTextInput from './modal-text-input.vue';
 import ModalConfirm from './modal-confirm.vue';
 

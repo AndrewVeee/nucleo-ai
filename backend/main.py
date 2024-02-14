@@ -12,7 +12,7 @@ from app import \
   embed, \
   chroma
 #  jwt, \
-#  llama_llm, \
+
 from ai_tools import prompt_loader
 from app.lib import job_queue
 
@@ -59,7 +59,7 @@ class App:
     functions.init(self)
     for entry in self.ai_functions.entries:
       self.log((
-        f"  {entry.alias} ({entry.title}): "
+        f"  {entry.title}: "
         f"{entry.get_description()}"
         f" - {[fn.name for fn in entry.functions]}"
       ))
