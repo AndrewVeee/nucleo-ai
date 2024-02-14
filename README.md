@@ -3,10 +3,12 @@
 An AI assistant app that mixes AI features with traditional personal productivity. The
 AI can work in the background to answer multiple chats, handle tasks, and stream/feed entries.
 
-**Warning**: Some features (esp the assistant mode) can use a lot of tokens. Be aware when you
+**Warnings**:
+This is "alpha" software. It is new. There are bugs and issues.
+
+Some features (esp the assistant mode) can use a lot of tokens. Be aware when you
 are trying this with paid APIs. This is an early release and there are bugs and
 improvements needed.
-
 
 ### Install and Setup
 
@@ -14,7 +16,7 @@ You should have Python 3 and git installed. I've tried to keep the app light-wei
 but RAG requires downloading some large files (about 850mb for the embed and cross encoder).
 
 The app does not include the LLM engine. You can connect it to any openai-compatible endpoint, like llama.cpp, oobabooga with
-the --api flag, and newer versions of ollama with the openai option. I use llama-cpp-python and
+the --api flag, and newer versions of ollama. I use llama-cpp-python and
 together ai quite a bit.
 
 #### Step 1
@@ -29,8 +31,8 @@ $ ./setup.sh
 
 Edit the config file in `./data/config.toml`
 
-Find the [llm] block and set your `openai_base_url` (something like http://localhost:5000/v1) and
-the `openai_api_key` if required. You can also set the `secret_key` if you want to require auth to
+Find the `[llm]` block and set your `openai_base_url` (something like http://localhost:5000/v1) and
+the `openai_api_key` if required. You can also set the `secret_key` at the top if you want to require auth to
 connect to Nucleo.
 
 #### Step 3
@@ -57,11 +59,13 @@ you are very careful with the wording.
 
 #### Docs (RAG)
 
-You can upload PDFs in the Docs tab or upload plain text/markdown files. You can create new
+You can upload PDFs (I recommend < 5mb right now) in the Docs tab or upload plain text/markdown files. You can create new
 docs at the top, or paste in a URL to download and convert it to markdown.
 
 With files uploaded, you can enable the Docs chat mode and it should do a decent job of
-finding relevant content and responding. Of course, this is dependent on your model.
+finding relevant content and responding. Of course, this is dependent on your model. For small
+context models, make sure to set the "Past Messages" chat option low or there won't be much room for
+RAG results.
 
 #### Stream
 
@@ -71,7 +75,7 @@ and summarize). When you create entries, you can replay them later.
 
 #### To Do
 
-There is a very (very) basic to do list in the app, so the AI can create entries for you. You
+There is a very basic to do list in the app, so the AI can create entries for you. You
 can add, editor, or remove entries through the tab.
 
 ### What's Next?
@@ -86,7 +90,7 @@ I have some ideas I really want to try:
 - Assistant Modes: There are many ways to implement the assistant mode, from quick 1- or 2-shot
   requests, to complex ReAct LLM loops. I want to experiment with multiple options, some for
   tiny models, some for large models.
-- Stream/Feed: I want to have cool integrations with things like email, calendar, and other personal
+- Stream/Feed: I want to have useful integrations with things like email, calendar, and other personal
   data sources, so it can all be in one place, and the AI can reference it.
 - More Functions: Each function makes the assistant more useful, and I'd like to have a list of
   popular requests to build.
@@ -95,9 +99,9 @@ I have some ideas I really want to try:
 
 ### Developers
 
-My long term goal for Nucleo is a platform that helps developers test ideas and make them available to others to try easily.
-I'm not a fan of most LLM frameworks, so I'd prefer Nucleo as a collection of tools that you can pick
-and choose as you need.
+My long term goal for Nucleo is a platform that helps developers build and test ideas and make them available
+to others to try easily. I'm not a fan of most LLM frameworks, so I'd prefer Nucleo as a collection of tools
+that you can pick and choose as you need.
 
 The code is pretty messy, but here are some key points to play around:
 
