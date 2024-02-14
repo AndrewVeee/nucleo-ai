@@ -3,6 +3,9 @@
 An AI assistant app that mixes AI features with traditional personal productivity. The
 AI can work in the background to answer multiple chats, handle tasks, and stream/feed entries.
 
+Here's a demo video:
+https://github.com/AndrewVeee/nucleo-ai/assets/153542699/60526628-62f5-462f-a6a4-affdbdb6d7c1
+
 **Warnings**:
 This is "alpha" software. It is new. There are bugs and issues.
 
