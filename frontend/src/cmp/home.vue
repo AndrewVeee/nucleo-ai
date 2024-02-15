@@ -98,7 +98,11 @@ export default {
           :class="view == 'chat' ? 'btn-tab-sel' : ''">Chat</button>
     </div>
     <div class="flex-grow"></div>
-    <button @click="onOpenSettings" class="btn btn ml-2 flex-x flex-ctr" title="Settings">
+    <a href="https://github.com/AndrewVeee/nucleo-ai#getting-help" target="_blank"
+        class="btn btn-sm btn-plain">
+      <svg-icon name="help" size="20"></svg-icon>
+    </a>
+    <button @click="onOpenSettings" class="btn btn-plain ml-2 flex-x flex-ctr" title="Settings">
       <span v-if="!app.connected && app.connect !== null" class="mr-2">Connection Error!</span>
       <svg-icon name="settings"></svg-icon>
     </button>
