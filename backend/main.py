@@ -34,6 +34,7 @@ class App:
     
     self.log("* Initializing webserver")
     self.server = web_server.Server(self,
+      host=self.config.get('server_host', '127.0.0.1')),
       port=int(self.config.get('server_port', '4567')),
       auth_key=self.config.get('auth_key', ''), 
     )

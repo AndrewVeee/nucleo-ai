@@ -1,6 +1,7 @@
 # If you make the app externally accessible, you should set a good
 # secret key.
 #auth_key = 'my s3cret k33y'
+server_host = 127.0.0.1
 server_port = 4742
 log_level = 3
 
