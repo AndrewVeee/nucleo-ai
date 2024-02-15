@@ -128,6 +128,7 @@ There's so much work to do. I'm happy to help if you want to contribute.
 
 Need help?
 
-- You can post issues here.
-- I've set up a subreddit to discuss and ask for help as well:
-  https://www.reddit.com/r/nucleoai/
+I've set up a subreddit to discuss issues and ideas:
+https://www.reddit.com/r/nucleoai/
+
+You can post in the issues tab as well, but the community might give a faster response.
