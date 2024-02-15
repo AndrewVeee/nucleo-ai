@@ -123,3 +123,11 @@ The code is pretty messy, but here are some key points to play around:
   see the chat model, or assistant_model2.py for a complex example.
 
 There's so much work to do. I'm happy to help if you want to contribute.
+
+### Getting Help
+
+Need help?
+
+- You can post issues here.
+- I've set up a subreddit to discuss and ask for help as well:
+  https://www.reddit.com/r/nucleoai/
