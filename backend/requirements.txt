@@ -1,6 +1,5 @@
 flask
 openai
-argon2
 beautifulsoup4
 Requests
 duckduckgo_search
