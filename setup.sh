@@ -10,8 +10,7 @@ if [ ! -e ./env ]; then
 fi
 
 source ./env/bin/activate
-#pip install torch --extra-index-url https://download.pytorch.org/whl/cpu
-pip install torch --index-url https://download.pytorch.org/whl/cpu
+pip install torch --extra-index-url https://download.pytorch.org/whl/cpu
 
 pip install -r ./backend/requirements.txt
 
