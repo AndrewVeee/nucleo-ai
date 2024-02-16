@@ -61,10 +61,11 @@ class EndpointAction:
     return self.response
 
 class Server(object):
-  def __init__(self, app, port=4567, auth_key=""):
+  def __init__(self, app, host='127.0.0.1', port=4567, auth_key=""):
     self.app = app
     self.server = None
     self.port = port
+    self.host = host
     self.auth_key = auth_key
     self.flask = Flask(__name__,
         static_folder='../static',
@@ -85,7 +86,7 @@ class Server(object):
     self.init()
 
   def start(self):
-    self.flask.run(port=self.port, threaded=True) #, debug=True)
+    self.flask.run(host=self.host, port=self.port, threaded=True) #, debug=True)
 
   def add(self, url, handler, methods=['POST'], **kwargs):
     name = kwargs['name'] if 'name' in kwargs else None
