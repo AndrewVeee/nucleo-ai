@@ -26,6 +26,8 @@ the --api flag, and newer versions of ollama. I use llama-cpp-python and
 together ai quite a bit.
 
 #### Step 1
+
+If you're using Windows, see this [install note](https://github.com/AndrewVeee/nucleo-ai/issues/4#issuecomment-1948396167).
 ```
 $ git clone git@github.com:AndrewVeee/nucleo-ai.git
 
