@@ -48,6 +48,9 @@ connect to Nucleo.
 Run `./start.sh` to start the app. The first run will take a bit to download the
 SentenceTransformers models for RAG support.
 
+#### Step 4
+
+Share your initial feedback on [r/nucleoai](https://www.reddit.com/r/nucleoai/) if you have time - it will help improve the app!
 
 ### Features
 
