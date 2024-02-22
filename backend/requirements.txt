@@ -8,3 +8,4 @@ markdownify
 bs4
 chromadb
 pymupdf
+toml

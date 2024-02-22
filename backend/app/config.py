@@ -1,9 +1,13 @@
-import tomllib
+import toml
 
 class Config:
   def __init__(self, app):
     self.app = app
-    self.user_conf = self.load_toml('../data/config.toml')
+    try:
+      self.user_conf = self.load_toml('../data/config.toml')
+    except Exception as e:
+      self.app.log("ERROR: Unable to load config file: {file}")
+      raise e
     self.config = {}
     self.config.update(self.user_conf)
 
@@ -20,11 +24,4 @@ class Config:
     return default
   
   def load_toml(self, file):
-    try:
-      with open(file, 'rb') as f:
-        cfg = tomllib.load(f)
-    except:
-      self.app.log(f"ERROR: Unable to load config file: {file}")
-      cfg = {}
-
-    return cfg
+    return toml.load(file)
