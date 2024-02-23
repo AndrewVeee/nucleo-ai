@@ -1,4 +1,5 @@
 import chromadb
+from chromadb.config import Settings
 
 class VectorDB:
   def __init__(self, app, dir='../data/', config={}, **kwargs):
@@ -6,7 +7,9 @@ class VectorDB:
     self.embed_name = config.get('db_name', 'test')
     self.dist_fn = config.get('dist_fn', 'cosine')
     # generate full dir based on embed_model config
-    self.chroma = chromadb.PersistentClient(path=f"{dir}/chroma-{self.embed_name}/")
+    self.chroma = chromadb.PersistentClient(
+      path=f"{dir}/chroma-{self.embed_name}/",
+    )
     self.default_count = 10
     self.init_collection()
 
