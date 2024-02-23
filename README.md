@@ -48,6 +48,11 @@ connect to Nucleo.
 Run `./start.sh` to start the app. The first run will take a bit to download the
 SentenceTransformers models for RAG support.
 
+Once the app has started, you will see a line like:
+` * Running on http://127.0.0.1:4742`
+
+Just open the link in your browser to start using Nucleo!
+
 #### Step 4
 
 Share your initial feedback on [r/nucleoai](https://www.reddit.com/r/nucleoai/) if you have time - it will help improve the app!
