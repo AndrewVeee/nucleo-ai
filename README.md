@@ -3,13 +3,12 @@
 An AI assistant app that mixes AI features with traditional personal productivity. The
 AI can work in the background to answer multiple chats, handle tasks, and stream/feed entries.
 
-Here's a demo video:
+Here's a demo video (recorded using OpenHermes Mistral 7b with llama.cpp):
 
 https://github.com/AndrewVeee/nucleo-ai/assets/153542699/60526628-62f5-462f-a6a4-affdbdb6d7c1
 
-For the curious: This demo was recorded using OpenHermes Mistral 7b through llama.cpp.
-
 **Warnings**:
+
 This is "alpha" software. It is new. There are bugs and issues.
 
 Some features (esp the assistant mode) can use a lot of tokens. Be aware when you
@@ -93,7 +92,7 @@ and summarize). When you create entries, you can replay them later.
 #### To Do
 
 There is a very basic to do list in the app, so the AI can create entries for you. You
-can add, editor, or remove entries through the tab.
+can add, edit, or remove entries through the tab.
 
 ### What's Next?
 
