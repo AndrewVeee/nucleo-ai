@@ -73,6 +73,16 @@ This is very early, and most models will make mistakes. Mixtral tends to do pret
 I personally use OpenHermes Mistral 7b for testing, and it has ~50% success rate unless
 you are very careful with the wording.
 
+#### Researcher
+
+In the stream, you can click the "Research" option from "Add to your stream..." to let the AI
+research a topic in-depth.
+
+It will generate an initial list of research topics, and allow you to configure max depth,
+max research time, whether it should search the web, and other options.
+
+The researcher will generate a doc with research on the topic, including links it used at the bottom.
+
 #### Docs (RAG)
 
 You can upload PDFs (I recommend < 5mb right now) in the Docs tab or upload plain text/markdown files. You can create new
