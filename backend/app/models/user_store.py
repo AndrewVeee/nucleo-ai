@@ -31,7 +31,7 @@ class UserStore(Table):
     self.embed_model = cls.app.vector.embed_name
     chunks = text_helpers.markdown_splitter(
       self.content,
-      max_meta_len=50, max_len=512, title=self.name,
+      max_meta_len=50, max_len=1024, title=self.name,
     )
     docs = []
     embeddings = []
@@ -47,4 +47,6 @@ class UserStore(Table):
         'chunk_idx': idx,
       })
 
+    if len(ids) == 0:
+      return None
     return cls.app.vector.collection.upsert(documents=docs, embeddings=embeddings, metadatas=metadata, ids=ids)

@@ -39,14 +39,14 @@ class URLRetriever:
     self.content = ''
     self.title = None
   
-  def get_url(self, url):
+  def get_url(self, url, timeout=60):
     req_headers = {
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36',
       'Accept-Encoding': 'gzip, deflate',
       'Accept': '*/*',
       'Connection': 'keep-alive'
     }
-    self.content = requests.get(url, headers=req_headers).content.decode('utf-8')
+    self.content = requests.get(url, headers=req_headers, timeout=timeout).content.decode('utf-8')
     return self.content
  
   def get_markdown(self):
@@ -54,7 +54,7 @@ class URLRetriever:
     body = soup.find('body')
     title = soup.find('title')
     if title:
-      self.title = title.text
+      self.title = title.text.strip("<br>").strip("\n")
     for tag in ['style', 'script']:
       for el in body.select(tag):
         el.extract()

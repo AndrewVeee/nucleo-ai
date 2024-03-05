@@ -1,3 +1,6 @@
+from flask import send_from_directory
+
+import os
 import time
 
 class AppState:
@@ -5,16 +8,15 @@ class AppState:
     self.app = app;
     server = app.server
     server.add('/', self.home, methods=['GET'], auth=False)
+    server.add('/uploads/<file>', self.serve_upload, methods=['GET'])
     server.add('/api/state/check_auth', self.test_conn)
     server.add('/state/api', self.list_apis)
     server.add('/state/config', self.get_config)
-    server.add('/state/test_stream', self.test_stream)
     server.add('/state/reload', self.reload)
 
-  def test_stream(self):
-    for i in range(5):
-      yield f"Test {i}"
-      time.sleep(1)
+  def serve_upload(self, req, res, user):
+    filename = req.path[9:]
+    return send_from_directory("../../data/uploads", filename)
 
   def home(self, req, res, user):
     res.status = 302
@@ -39,10 +41,6 @@ class AppState:
   def reload(self, req, res, user):
     self.app.reload()
     return self.get_config(req, res, user)
-
-  def test_stream(self, req, res, user):
-    res.headers.set('Content-Type', 'application/stream')
-    res.response = self.test_stream()
 
   def get_config(self, req, res, user):
     return {"reload_cnt": self.app.reload_count, "config": self.app.config.config}

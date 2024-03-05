@@ -21,9 +21,9 @@ export default {
 <div @click="app.modals.splice(0,1)" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: #0004;">
   <div @click.stop class="card flex-y flex-grow"
       style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px;
-        max-width: 90%;"
+        max-width: 90%; max-height: 99%;"
       :style="cfg.opts.style">
-    <div class="flex-x xbg-sec round-lg mt-1 mb-3 pb-2">
+    <div class="flex-x round-lg mt-1 mb-2 pb-2">
       <h3 class="my-0" v-if="cfg.opts.title">{{cfg.opts.title}}</h3>
       <div class="flex-grow"></div>
       <button @click="app.close_modal()" class="btn btn-plain">

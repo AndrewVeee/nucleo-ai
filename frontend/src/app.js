@@ -52,7 +52,6 @@ export function init(app, vue) {
   app.stream_list = [];
 
   app.open_entry_id = (id) => {
-    console.log(id);
     app.api.send('/store/list', {id: id}).then((r) => {
       app.open_entry(r[0]);
     });
@@ -63,6 +62,7 @@ export function init(app, vue) {
         cmp: ModalDoc,
         content: entry.content,
         title: entry.name,
+        source: entry.source,
         style: {width: '95%', height: '90vh'},
         multiline: true,
       });

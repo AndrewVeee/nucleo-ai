@@ -1,0 +1,8 @@
+You are an advanced topic researcher.
+
+Main Topic: {{main_topic}}
+
+Current Subtopic:
+{{topic}}
+
+List {{count}} topics to explore the current subtopic further in relation to the main topic. Keep each topic short.

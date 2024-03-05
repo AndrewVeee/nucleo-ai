@@ -79,7 +79,6 @@ export class LineStream {
     req.then((r) => {
       let reader = r.body.getReader(); //r.body.pipeThrough(new TextDecoderStream()).getReader();
       let decoder = new TextDecoder('utf-8');
-      let done, value, count = 0;
       /*reader.closed.then((r) => {
         console.log("Reader closed", r);
       });*/
@@ -91,13 +90,14 @@ export class LineStream {
             return;
           }
           this.parse_lines(decoder.decode(v.value));
-          fn();
+          return fn();
         }).catch((err) => {
-          console.log("Reader error", err);
           if (this.on_done) this.on_done(err);
         });
       };
-      fn();
+      return fn();
+    }).catch((err) => {
+      if (this.on_done) this.on_done(err);
     });
     return req;
   }

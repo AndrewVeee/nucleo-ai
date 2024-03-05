@@ -1,0 +1,10 @@
+We need to search the web for the topic below.
+
+The overview topic is: {{main_topic}}
+The current topic is:
+{{current_topic}}
+
+What's a good, simple google search for this topic?
+
+Write one line without quotes, like this:
+search: <search query>

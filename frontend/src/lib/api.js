@@ -93,7 +93,7 @@ export class StreamResponse {
     } else if (msg.event == 'state') {
       this.state[msg.data.level] = msg.data.msg;
       this.event({name: 'state', content: this.state});
-    } else  if (msg.event) {
+    } else if (msg.event) {
       this.event({name: msg.event, content: msg.data});
     }
   }
@@ -145,6 +145,7 @@ class CompletionStream {
     this.handle_line(data);
   }
   on_done(err) {
+    console.log("Done", err);
     if (err)
       this.promise_rej(err);
     else

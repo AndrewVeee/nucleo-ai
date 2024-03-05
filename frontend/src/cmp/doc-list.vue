@@ -9,33 +9,46 @@ export default {
     return {
       new_doc: '',
       processing: false,
+      uploads: [],
     } 
   },  
   methods: {
-    create_doc: function(title, content) {
-      this.processing = "Saving doc: " + title;
-      this.app.api.send('/store/create', {
+    create_doc: function(title, content, opts) {
+      if (!opts) opts = {};
+      //this.processing = "Saving doc: " + title;
+      let p = this.app.api.send('/store/create', {
         data_type: 'doc',
         name: title,
         content: content,
+        source: opts.source,
       }).then((r) => {
         this.app.doc_list.unshift(r);
         this.new_doc = '';
         if (!content) this.onEdit(r);
       }).finally(() => { this.processing = false;});
+
+      this.uploads.unshift({p: p, status: 'Creating doc: ' + title});
+      p.finally((r) => { this.removeUploadPromise(p)});
+      return p;
     },
     addDoc: function() {
       let title = this.new_doc, content = '';
       if (/^https?:\/\//.exec(this.new_doc)) {
-        this.processing = "Downloading/Converting " + this.new_doc;
-        this.app.api.send('/tools/url_to_md', {
-          url: this.new_doc,
-        }).then((r) => {
-          if (!r.title) {
-            r.title = r.content.split("\n")[0].slice(0, 45);
-          }
-          this.create_doc(r.title, r.content);
-        }).finally(() => { this.processing = false; });
+        let p = new Promise((res, rej) => {
+          this.app.api.send('/tools/url_to_md', {
+            url: this.new_doc,
+          }).then((r) => {
+            if (!r.title) {
+              r.title = r.content.split("\n")[0].slice(0, 45);
+            }
+            this.create_doc(r.title, r.content, {source: this.new_doc}).finally(() => {
+              this.removeUploadPromise(p);
+              res();
+            });
+          }).catch((err) => { rej(); });
+        });
+        this.uploads.unshift({p: p, file: this.new_doc, status: ''});
+        p.finally((r) => { this.removeUploadPromise(p)});
         return;
       }
       this.create_doc(this.new_doc, '');
@@ -73,15 +86,24 @@ export default {
       });
     },
     onShowDoc: function(doc) {
-      console.log(doc, doc.id);
       this.app.open_entry_id(doc.id);
     },
+    removeUploadPromise: function(p) {
+      for (let idx in this.uploads) {
+        if (this.uploads[idx].p == p)
+          this.uploads.splice(idx, 1);
+      }
+    },
     uploadFile: function(file) {
-      this.app.api.upload('/store/upload', {file: file}, {
+      let p = this.app.api.upload('/store/upload', {file: file}, {
         no_ct: true,
       }).then((r) => {
         this.app.doc_list.unshift(r);
       });
+
+      this.uploads.unshift({p: p, file: file.name});
+      p.finally((r) => { this.removeUploadPromise(p)});
+      return p;
     },
     onDropFile: function(evt) {
       evt.preventDefault();
@@ -91,10 +113,6 @@ export default {
         console.log("File", file);
         p.push(this.uploadFile(file));
       }
-      this.processing = "Uploading "  + (p.length) + " files...";
-      Promise.allSettled(p).finally(() => {
-        this.processing = false;
-      });
     },
     onSelectFile: function(evt) {
       let p = [];
@@ -102,10 +120,6 @@ export default {
         p.push(this.uploadFile(item));
       }
       this.$refs.files.multiline = '';
-      this.processing = "Uploading "  + (p.length) + " files...";
-      Promise.allSettled(p).finally(() => {
-        this.processing = false;
-      });
     },
   },
   beforeUnmount: function() {
@@ -138,6 +152,10 @@ export default {
         @click="$refs.files.click()">
       <input @input="onSelectFile" multiple="true" type="file" ref="files" style="display: none;" />
       Drag files or click to upload.
+    </div>
+    <div v-for="up in uploads" class="mx-3">
+      <svg-icon name="loader" size="16" class="rotate mr-1"></svg-icon>
+      {{ up.status || up.file }}
     </div>
     <div class="flex-scroll-y" v-if="app.doc_list">
       <div class="mx-2 p-2">

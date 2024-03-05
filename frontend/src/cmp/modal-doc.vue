@@ -29,6 +29,9 @@ export default {
 <template>
 <div class="p-2 pt-0 flex-y flex-grow" style="">
   <h2 v-if="false && opts.title">{{opts.title}}</h2>
+  <div v-if="opts.source" class="text-sm">
+    Source: <a :href="opts.source" target="_blank">{{ opts.source }}</a>
+  </div>
   <div class="flex-grow flex-scroll" style="overflow-y: scroll; ">
     <pre v-if="false" style="white-space: pre-wrap">{{ this.content }}</pre>
     <div v-html="app.markdown(this.content)"></div>

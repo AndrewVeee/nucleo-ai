@@ -3,12 +3,14 @@
 import ModalConfirm from './modal-confirm.vue';
 import entry_chat from './stream-entry-chat.vue';
 import entry_assistant from './stream-entry-assistant.vue';
+import entry_research from './stream-entry-research.vue';
 import entry_log from './stream-entry-log.vue';
 import entry_message from './stream-entry-message.vue';
 
 export default {
   props: ['app', 'item', 'level'],
-  components: {entry_chat, entry_log, entry_assistant, entry_message},
+  components: {entry_chat, entry_log, entry_assistant, entry_message,
+      entry_research},
   data() {
     return {
       feed: this.app.feed,
@@ -76,7 +78,7 @@ export default {
       <div class="text-sm mb-1" style="display: inline-block; font-weight: 300;">Add to your stream...</div>
       <button @click="onCreate('assistant')" class="btn btn-plain ml-3">Assistant Task</button>
       <button @click="onCreate('chat')" class="btn btn-plain ml-3">Quick Chat</button>
-      <button v-if="false" @click="onCreate('research')" class="btn btn-plain ml-3">Research</button>
+      <button @click="onCreate('research')" class="btn btn-plain ml-3">Research</button>
       <button @click="onCreate('message')" class="btn btn-plain ml-3">Message</button>
     </div>
     <div class="flex-scroll-y pr-1 mt-0 ml-2 pr-3">

@@ -20,8 +20,11 @@ class Tools:
 
   def url_to_md(self, request, res, user):
     req = web.URLRetriever()
+    self.app.debug(f"md: Retrieve url: {request.json['url']}")
     req.get_url(request.json['url'])
+    self.app.debug(f"md: Convert to MD: {request.json['url']}")
     md = req.get_markdown()
+    self.app.debug(f"md: Done: {request.json['url']}")
     return {
       'title': req.title,
       'content': md,

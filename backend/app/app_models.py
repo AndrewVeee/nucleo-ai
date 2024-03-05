@@ -3,6 +3,7 @@ from app.ai_models import ai_model_base, \
   message_model, \
   assistant_model, \
   assistant_model2, \
+  researcher_model, \
   hi_model
 
 class AppModels:
@@ -13,6 +14,7 @@ class AppModels:
     self.models.add_model(assistant_model.AssistantModel('assistant-orig', app.llm, app))
     self.models.add_model(assistant_model2.AssistantModel('assistant', app.llm, app))
     self.models.add_model(message_model.MessageModel('message', app.llm, app))
+    self.models.add_model(researcher_model.ResearcherModel('researcher', app.llm, app))
     self.models.add_model(hi_model.HiModel('hi', app.llm, app))
     self.model_list = self.models.models
 

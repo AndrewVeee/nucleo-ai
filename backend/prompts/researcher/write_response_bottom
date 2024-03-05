@@ -1,0 +1,14 @@
+Let's write the content now.
+
+Main Topic: {{main_topic}}
+
+Current Subtopic:
+{{topic}}
+
+We are writing one section of a larger document, so minimize restating the topics.
+
+If images and links are provided above, you can include them using markdown format when they're useful.
+
+Write {{paragraphs}} paragraphs based on what you know and use the web snippets to help with specifics.
+
+Use your expert abilities of detecting bias, highlighting strong arguments, and answering complex topics to write about the subtopic and how it relates to the main topic.

@@ -36,7 +36,7 @@ class EndpointAction:
 
     return False
 
-  def __call__(self, *args):
+  def __call__(self, *args, **kwargs):
     self.response = Response(status=200, headers={'Content-Type': 'application/json'})
     if self.auth and not self.check_auth():
       self.response.status = 403
@@ -57,6 +57,8 @@ class EndpointAction:
       self.response.response = json.dumps(response)
     elif response.__class__ == str:
       self.response.response = response
+    elif response is not None:
+      self.response = response
 
     return self.response
 

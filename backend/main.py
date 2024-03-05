@@ -39,6 +39,7 @@ class App:
       auth_key=self.config.get('auth_key', ''), 
     )
     self.server.init()
+
     self.prompts = prompt_loader.PromptLoader(cache=self.config.get('cache_prompts', False))
     
     self.log("* Loading LLM")
@@ -92,8 +93,9 @@ class App:
       print(f"[{time.ctime()}]", *args)
 
   def debug(self, *args):
-    if self._debug:
-      print(time.ctime(), "DEBUG:", *args)
+    self.log(*args, level=3)
+    #if self._debug:
+    #  print(time.ctime(), "DEBUG:", *args)
 
   def get_storage_dir(self, name, ex="", file=""):
     pass

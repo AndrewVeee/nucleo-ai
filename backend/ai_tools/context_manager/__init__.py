@@ -56,6 +56,12 @@ class ContextManager:
     self.ephemeral = []
     self.requests = []
     self.request_text = ''
+    self.last_message_map = {}
+    self.last_message_content = []
+    self.last_rank_text = ''
+
+    # Minimum rank score
+    self.min_rank = kwargs.get('min_rank', -1)
 
     # Max context size
     self.max_tokens = self.get_opt(kwargs, 'max_tokens', 1024)
@@ -93,10 +99,11 @@ class ContextManager:
     self.requests = []
     self.request_text = ''
 
-  def request(self, content, role=Roles.user, include_text=True):
+  def request(self, content, role=Roles.user, include_text=True, top=False):
     request = {
       'content': content,
-      'role': role
+      'role': role,
+      'top': top,
     }
     if include_text:
       self.request_text += "\n" + content
@@ -116,12 +123,13 @@ class ContextManager:
     self.ephemeral.append(ephem)
     return ephem
 
-  def add_dynamic(self, name, title, fn=None, content=""):
+  def add_dynamic(self, name, title, fn=None, content="", role=Roles.system):
     self.dynamic[name] = {
       "name": name,
       "title": title,
       "fn": fn,
-      "content": content
+      "content": content,
+      "role": role,
     }
     return self.dynamic[name]
 
@@ -148,6 +156,8 @@ class ContextManager:
     if item['type'] == 'dyn':
       if item['obj']['fn']:
         return item['obj']['fn']()
+      elif item['obj']['content'] is None:
+        return item['obj']['title']
       else:
         return item['obj']['content']
     elif item['type'] == 'ephemeral':
@@ -156,8 +166,16 @@ class ContextManager:
       return item['obj'].message
     return None
 
+  def get_role(self, role, default=Roles.user):
+    if role is None:
+      role = default
+    if role in self.role_map:
+      return self.role_map[role]
+    return role
+
   def generate_message_list(self, sorted_map, past_messages):
     messages = []
+    top = []
     # TODO: Keep message history in order
     for item in sorted_map:
       if not item['include']:
@@ -166,33 +184,41 @@ class ContextManager:
         role = item['obj'].role
         msg = item['obj'].message
       elif item['type'] == 'dyn':
-        role = Roles.system
+        role = item['obj']['role'] #Roles.system
         msg = item['content']
       elif item['type'] == 'ephemeral':
         role = item['obj']['role'] #Roles.system
         msg = item['obj']['content']
-      messages.append({'role': self.role_map[role], 'content': msg})
+      messages.append({'role': self.get_role(role), 'content': msg})
     for msg in past_messages:
-      messages.append({'role': self.role_map[msg.role] if msg.role in self.role_map else msg.role, 'content': msg.message})
+      messages.append({'role': self.get_role(msg.role), 'content': msg.message})
     for req in self.requests:
-      #messages.append({'role': self.role_map[req['role']], 'content': req['content']})
-      messages.append({'role': self.role_map[req['role']] if req['role'] in self.role_map else req['role'], 'content': req['content']})
+      if req['top']:
+        top.append({'role': self.get_role(req['role']), 'content': req['content']})
+      else:
+        messages.append({'role': self.get_role(req['role']), 'content': req['content']})
+    for msg in top:
+      messages.insert(0, msg)
     return messages
 
-  def generate_messages(self):
+  def generate_messages(self, from_text=None):
     req = self.requests[-1]
     token_count = 0
-
+    rank_text = from_text if from_text is not None else self.request_text
     # Generate a list with all content and a map of each index to it's type/obj
     msg_content, msg_map = self.gen_message_map()
     # Rank the content and apply the scores
     if len(msg_content) == 0:
       scores = []
     else:
-      scores = self.ranker(self.request_text, msg_content)
+      scores = self.ranker(rank_text, msg_content)
     for idx,score in enumerate(scores):
       msg_map[idx]['score'] += score
-    
+
+    self.last_message_map = msg_map
+    self.last_message_content = msg_content
+    self.last_rank_text = rank_text
+
     # Set initial token count to requests content
     for req in self.requests:
       token_count += self.token_counter(req['content'])
@@ -220,7 +246,7 @@ class ContextManager:
       tokens = self.token_counter(content)
       if token_count + tokens <= self.max_tokens:
         # Don't include items with a score <= 0
-        if item['score'] <= 0:
+        if item['score'] < self.min_rank:
           break
         # We're adding the item, so if it's dynamic, set the content so we don't call the fn again.
         if item['type'] == 'dyn':
