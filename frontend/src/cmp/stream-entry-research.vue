@@ -150,6 +150,9 @@ export default {
       this.entry.pinned = !this.entry.pinned;
       this.save();
     },
+    delTopic: function(topic, idx) {
+      this.metadata.topics.splice(idx, 1);
+    },
     onCancel: function() {
       if (this.metadata.entries.length > 0) {
         this.is_new = false;
@@ -183,6 +186,10 @@ export default {
         },
       }
     });
+    if (this.metadata.entries.length == 0) {
+      this.is_new = true;
+      if (this.metadata.topics.length > 0) this.new_step = 2;
+    }
   },
 }
 </script>
@@ -234,8 +241,11 @@ export default {
       </div>
       <div v-if="new_step == 2">
         <p>How does this research list look? Edit, remove, or add topics below.</p>
-        <div v-for="topic,idx in metadata.topics" class="flex-x px-2 mb-2">
+        <div :key="idx + '_' + topic" v-for="topic,idx in metadata.topics" class="flex-x px-2 mb-2">
           <input class="form-control flex-grow" v-model="metadata.topics[idx]" />
+          <button @click="delTopic(topic, idx)" class="btn btn-plain ml-1">
+            <svg-icon name="x"></svg-icon>
+          </button>
         </div>
         <div class="mt-3">
           <button @click="startResearch" class="btn btn-pri mr-2">Start Research!</button>
