@@ -241,7 +241,7 @@ export default {
       </div>
       <div v-if="new_step == 2">
         <p>How does this research list look? Edit, remove, or add topics below.</p>
-        <div :key="idx + '_' + topic" v-for="topic,idx in metadata.topics" class="flex-x px-2 mb-2">
+        <div :key="idx" v-for="topic,idx in metadata.topics" class="flex-x px-2 mb-2">
           <input class="form-control flex-grow" v-model="metadata.topics[idx]" />
           <button @click="delTopic(topic, idx)" class="btn btn-plain ml-1">
             <svg-icon name="x"></svg-icon>
