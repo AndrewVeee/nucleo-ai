@@ -261,7 +261,7 @@ export default {
         </div>
         <div class="mt-2">Max Research Time (Minutes): {{ metadata.config.max_time}}</div>
         <div class="flex-x">
-          <input type="range" class="flex-grow" min="0.5" max="10" step="0.25" v-model="metadata.config.max_time" />
+          <input type="range" class="flex-grow" min="0.5" max="30" step="0.25" v-model="metadata.config.max_time" />
         </div>
         <div class="mt-2">Subtopic Count: {{ metadata.config.subtopic_count}}</div>
         <div class="flex-x">
